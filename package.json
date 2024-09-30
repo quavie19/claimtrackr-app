@@ -2,9 +2,10 @@
   "name": "claimtrackr-app",
   "version": "1.0.0",
   "description": "This web application allows insured individuals and approved third parties to track the status of property insurance claims in real-time",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "start": "node"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,0 @@
-POST /api/claims              // Create a new claim (insured)
-GET /api/claims               // Get all claims (admin, adjuster, or contractor)
-GET /api/claims/:claimId      // Get a specific claim by claim ID (insured, contractor, adjuster)
-PUT /api/claims/:claimId      // Update claim details (admin or adjuster)
-DELETE /api/claims/:claimId   // Delete a claim (admin only)

@@ -14,6 +14,12 @@ const activate = async (req, res) => {
         .status(404)
         .json({ message: 'Customer not found or information incorrect' });
     }
+    //check if user is already active
+    if (user.rows[0].is_active) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Account is already activated' });
+    }
     // Mark the user as active
     await pool.query(
       'UPDATE customers SET is_active = TRUE WHERE user_id = $1',

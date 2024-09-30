@@ -14,6 +14,8 @@ CREATE TABLE Customers (
 );
 
 
+
+
 CREATE TABLE Claims (
     claim_id INT PRIMARY KEY,
     user_id INT REFERENCES Users(user_id),  -- Foreign key for user_id

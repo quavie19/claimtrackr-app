@@ -1,9 +1,22 @@
 const express = require('express');
 const router = express.Router(); // Use Router instead of express()
-const { activate } = require('../controllers/auth_controller'); // Destructure signup from auth_controller
+const {
+  login,
+  loginLimiter,
+  authenticateToken,
+  activate,
+} = require('../controllers/auth_controller'); // C
 
-// Define the route
-router.post('/activate', activate); // Ensure signup is a function
+// Login route
+router.post('/login', login, loginLimiter);
+
+//activate route
+router.post('/activate', activate);
+
+// Example of a protected route
+router.get('/protected', authenticateToken, (req, res) => {
+  res.json({ message: 'This is a protected route', user: req.user });
+});
 
 // Export the router
 module.exports = router; // Export the router directly

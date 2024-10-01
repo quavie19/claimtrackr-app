@@ -1,8 +1,0 @@
- user_id |   full_name   |   username   |   password_hash   |       email       | policy_number | phone_number | zip_code | is_active |         created_at         
----------+---------------+--------------+-------------------+-------------------+---------------+--------------+----------+-----------+----------------------------
-       1 | John Doe      | johndoe      | hashedpassword123 | john@example.com  | POL12345      | 555-1234     | 12345    | t         | 2024-09-29 18:46:45.824372
-       2 | Alice Johnson | alicejohnson | hashedpassword789 | alice@example.com | POL11111      | 555-1111     | 54321    | t         | 2024-09-29 18:46:45.824372
-       3 | Jane Smith    |              |                   | jane@example.com  | POL67890      | 555-5678     | 67890    | f         | 2024-09-29 18:49:55.845032
-       4 | Bob Brown     |              |                   | bob@example.com   | POL22222      | 555-2222     | 98765    | t         | 2024-09-29 18:49:55.845032
-       5 | Bea Smith     |              |                   |                   | POL44444      | 2345678901   | 67890    | f         | 2024-09-30 01:49:59.503124
-       6 | Blair Waldorf |              |                   |                   | POL33333      | 1234567890   | 98765    | f         | 2024-09-30 01:49:59.503124

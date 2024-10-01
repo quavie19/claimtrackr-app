@@ -8,7 +8,7 @@ function Activation() {
   const [phone_number, setPhoneNumber] = useState('');
   const [zip_code, setZipCode] = useState('');
 
-  const createAccount = async (e) => {
+  const activateAccount = async (e) => {
     e.preventDefault();
     try {
       const body = { policy_number, phone_number, zip_code };
@@ -39,7 +39,7 @@ function Activation() {
         <i className="bi bi-person-circle"></i>
       </div>
       {/* ACTIVATION FORM */}
-      <form className="container" onSubmit={createAccount}>
+      <form className="container" onSubmit={activateAccount}>
         <div className="mb-3 mt-3">
           <label className="form-label">Policy Number</label>
           <input

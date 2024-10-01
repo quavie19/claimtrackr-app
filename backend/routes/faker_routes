@@ -1,0 +1,7 @@
+const express = require('express');
+const router = express.Router(); // Use Router instead of express()
+const { generateData } = require('../controllers/faker');
+
+router.post('/generate-data', generateData);
+
+module.exports = router;

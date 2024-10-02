@@ -2,6 +2,7 @@ const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const pool = require('../db');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 
 // Secret key for signing the JWT
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
@@ -125,4 +126,47 @@ const activate = async (req, res) => {
   }
 };
 
-module.exports = { login, loginLimiter, authenticateToken, activate };
+// create profile
+
+const createProfile = async (req, res) => {
+  try {
+    // Destructure the username, password, and user_id from req.body
+    const { username, password, user_id } = req.body;
+
+    // Validate that required fields are present
+    if (!username || !password || !user_id) {
+      return res.status(400).json({ error: 'All fields are required.' });
+    }
+
+    // Hash the password before storing it
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    // Perform the update query using user_id
+    const result = await pool.query(
+      'UPDATE customers SET username = $1, password_hash = $2 is_active = true WHERE user_id = $3',
+      [username, passwordHash, user_id]
+    );
+
+    // Check if any row was updated
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Respond with success message
+    res.status(200).json({ message: 'Profile updated successfully.' });
+  } catch (err) {
+    // Log the error message and send an error response
+    console.error('Error updating profile:', err.message);
+    res
+      .status(500)
+      .json({ error: 'Internal Server Error', message: err.message });
+  }
+};
+
+module.exports = {
+  login,
+  loginLimiter,
+  authenticateToken,
+  activate,
+  createProfile,
+};

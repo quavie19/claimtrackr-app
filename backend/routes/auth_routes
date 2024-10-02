@@ -5,6 +5,7 @@ const {
   loginLimiter,
   authenticateToken,
   activate,
+  createProfile,
 } = require('../controllers/auth_controller'); // C
 
 // Login route
@@ -12,6 +13,9 @@ router.post('/login', login, loginLimiter);
 
 //activate route
 router.post('/activate', activate);
+
+//create profile
+router.put('/createProfile', createProfile);
 
 // Example of a protected route
 router.get('/protected', authenticateToken, (req, res) => {

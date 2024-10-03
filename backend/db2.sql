@@ -103,6 +103,20 @@ CREATE INDEX idx_claims_adjuster_id ON Claims(adjuster_id);
 CREATE INDEX idx_claims_status_id ON Claims(status_id);
 
 
+CREATE TABLE customer_policy_claims AS
+SELECT 
+  c.user_id, c.first_name, c.last_name, c.username, c.email, c.phone_number, c.zip_code, c.created_at,
+  p.policy_number, p.policy_type, p.start_date, p.end_date, 
+  cl.claim_id, cl.date_of_loss, cl.claim_description, cl.status_id, cl.adjuster_id,
+  cla.status_name,
+  a.first_name AS adjuster_first_name, a.last_name AS adjuster_last_name, a.email AS adjuster_email, a.phone_number AS adjuster_phone_number
+FROM customers c
+RIGHT JOIN policies p ON c.user_id = p.customer_id
+RIGHT JOIN claims cl ON p.policy_id = cl.policy_id
+RIGHT JOIN claimstatus cla ON cl.status_id = cla.status_id
+RIGHT JOIN adjusters a ON cl.adjuster_id = a.adjuster_id;
+
+
 -- THIRD PARTY SIDE 
 
 CREATE TYPE third_party_role AS ENUM ('contractor', 'adjuster');

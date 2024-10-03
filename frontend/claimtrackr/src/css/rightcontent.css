@@ -1,0 +1,51 @@
+.right {
+    flex: 1;
+    /* Take the remaining space */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Prevent overflow */
+}
+
+.right h1 {
+    margin-bottom: 4rem;
+    font-family: "Playwrite DK Uloopet", cursive;
+}
+
+/* Form styles */
+form {
+    width: 100%;
+    /* Make the form take full width */
+    max-width: 400px;
+    /* Optional max width for the form */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+
+    /* Full width */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    /* Full width */
+    padding: 10px;
+    /* Padding for better spacing */
+    border: 1px solid #000;
+    /* Border style */
+    border-radius: 5px;
+    /* Rounded corners */
+    box-sizing: border-box;
+    /* Include padding and border in width */
+    flex-shrink: 0;
+    /* Prevent shrinking */
+}

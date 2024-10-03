@@ -1,4 +1,3 @@
-const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const pool = require('../db');
 const jwt = require('jsonwebtoken');
@@ -6,13 +5,6 @@ const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 
 // Secret key for signing the JWT
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
-
-// Rate limit: maximum 5 requests per minute
-const loginLimiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minute
-  max: 5, // limit each IP to 5 requests per windowMs
-  message: 'Too many login attempts, please try again later.',
-});
 
 // Sign in
 const login = async (req, res) => {
@@ -66,20 +58,6 @@ const login = async (req, res) => {
     console.error('Error logging in:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
-};
-
-// Middleware to protect routes
-const authenticateToken = (req, res, next) => {
-  const token =
-    req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
-
-  if (!token) return res.sendStatus(401); // Unauthorized
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403); // Forbidden
-    req.user = user; // Save user info in request for use in protected routes
-    next();
-  });
 };
 
 //activate account
@@ -165,8 +143,6 @@ const createProfile = async (req, res) => {
 
 module.exports = {
   login,
-  loginLimiter,
-  authenticateToken,
   activate,
   createProfile,
 };

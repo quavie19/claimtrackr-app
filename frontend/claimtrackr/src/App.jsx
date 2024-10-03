@@ -1,13 +1,13 @@
 import './App.css';
 
 // components
-import Activation from './components/Activation';
+import Login from './components/homepage/Login';
 
 function App() {
   return (
     <>
       <div>
-        <Activation />
+        <Login />
       </div>
     </>
   );

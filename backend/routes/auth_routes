@@ -2,11 +2,10 @@ const express = require('express');
 const router = express.Router(); // Use Router instead of express()
 const {
   login,
-  loginLimiter,
-  authenticateToken,
   activate,
   createProfile,
-} = require('../controllers/auth_controller'); // C
+} = require('../controllers/auth_controller');
+const { protectedRoute, loginLimiter } = require('../middleware/middleware');
 
 // Login route
 router.post('/login', login, loginLimiter);
@@ -18,7 +17,7 @@ router.post('/activate', activate);
 router.put('/createProfile', createProfile);
 
 // Example of a protected route
-router.get('/protected', authenticateToken, (req, res) => {
+router.get('/protected', protectedRoute, (req, res) => {
   res.json({ message: 'This is a protected route', user: req.user });
 });
 
